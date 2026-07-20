@@ -691,9 +691,7 @@ a {
 }
 
 .footer-social a:hover i {
-    /* background:#fff; */
     color: #3294bc;
-    /* border-color:#fff; */
 }
 
 .footer-logo {
@@ -768,60 +766,6 @@ a {
     margin: 5px
 }
 
-.modal {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    background: #081216a8;
-    backdrop-filter: blur(8px);
-    z-index: 30;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .25s, visibility .25s
-}
-
-.modal.open {
-    opacity: 1;
-    visibility: visible
-}
-
-.modal-card {
-    max-width: 590px;
-    background: #fff;
-    padding: 53px;
-    position: relative;
-    border-radius: 20px;
-    box-shadow: 0 28px 80px #0005;
-    transform: translateY(22px) scale(.97);
-    transition: transform .35s cubic-bezier(.2, .8, .2, 1)
-}
-
-.modal.open .modal-card {
-    transform: translateY(0) scale(1)
-}
-
-.modal-card h2 {
-    font-size: 36px;
-    margin: 15px 0 8px
-}
-
-.modal-card p {
-    color: var(--muted);
-    line-height: 1.7
-}
-
-.modal-close {
-    position: absolute;
-    right: 18px;
-    top: 13px;
-    border: 0;
-    background: transparent;
-    font-size: 32px;
-    cursor: pointer;
-    color: var(--muted)
-}
 
 .reveal {
     opacity: 0;
