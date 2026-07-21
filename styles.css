@@ -306,12 +306,6 @@ a {
     min-height: 420px;
     overflow: hidden;
     box-shadow: 0 1px 0 #d8e1e233;
-    transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 24px 40px #13282c22
 }
 
 .service-card img {
@@ -319,11 +313,6 @@ a {
     height: 190px;
     object-fit: cover;
     filter: saturate(.8);
-    transition: transform .6s
-}
-
-.service-card:hover img {
-    transform: scale(1.06)
 }
 
 .service-card div {
