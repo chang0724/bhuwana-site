@@ -186,50 +186,49 @@
     </section>
 
     <section class="projects section" id="projects">
+
       <div class="section-label">03 / SELECTED PROJECTS</div>
+
       <h2>Our Project</h2>
-      <div class="project-list">
-        <article>
-          <span>01</span>
-          <div>
-            <h3>PPFTZ-01 IMPORT (LDP to FTZ) </h3>
+
+      <div class="project-layout">
+
+        <aside class="project-menu">
+
+          <div class="project-link active" data-project="0">
+            <h4>PPFTZ-01 IMPORT (LDP to FTZ)</h4>
             <p>Singapore to Batam -
               Used Goods (BMTB – Used Capital Goods)</p>
-            <div class="project-images">
-              <img src="asset/img/project/Project1/BMTB01.jpeg" alt="Project image 1">
-              <img src="asset/img/project/Project1/BMTB02.jpeg" alt="Project image 2">
-              <img src="asset/img/project/Project1/BMTB03.jpeg" alt="Project image 3">
-              <img src="asset/img/project/Project1/BMTB04.jpeg" alt="Project image 4">
-              <img src="asset/img/project/Project1/BMTB05.jpeg" alt="Project image 5">
-            </div>
           </div>
-        </article>
-        <article><span>02</span>
-          <div>
+
+          <div class="project-link" data-project="1">
             <h3>PPFTZ-01 Import (FTZ to TLDDP)</h3>
             <p>Batam to Jakarta -
               Commodity Conversion Goods: "Ducting with Accessories"</p>
-            <div class="project-images">
-              <img src="asset/img/project/Project2/comodity1.jpeg" alt="Project image 1">
-              <img src="asset/img/project/Project2/comodity2.jpeg" alt="Project image 2">
-              <img src="asset/img/project/Project2/comodity3.jpeg" alt="Project image 3">
-              <img src="asset/img/project/Project2/comodity4.jpeg" alt="Project image 4">
-              <img src="asset/img/project/Project2/comodity5.jpeg" alt="Project image 5">
-            </div>
-        </article>
-        <article><span>03</span>
-          <div>
+          </div>
+
+          <div class="project-link" data-project="2">
             <h3>PPFTZ-02 Import (FTZ to FTZ)</h3>
             <p>Karimun to Batam -
               Commodity: Granite</p>
-            <div class="project-images">
-              <img src="asset/img/project/Project3/comodity1.jpeg" alt="Project image 1">
-              <img src="asset/img/project/Project3/comodity2.jpeg" alt="Project image 2">
-              <img src="asset/img/project/Project3/comodity3.jpeg" alt="Project image 3">
-            </div>
-        </article>
+          </div>
+
+        </aside>
+
+        <div class="project-gallery">
+
+          <div class="gallery-bg"></div>
+
+          <img id="galleryImage" src="" alt="Project">
+
+          <div class="gallery-thumbs"></div>
+
+        </div>
+
       </div>
+
     </section>
+
 
     <section class="location section" id="contact">
       <div>
@@ -379,7 +378,7 @@
     </div>
 
     <div class="bg-secondary text-center py-3 mt-5">
-      ©  2026
+      © 2026
       <strong>PT. BHUWANA INDO MARSHADA</strong>.
       All Rights Reserved
 
@@ -421,19 +420,6 @@
       max-height: none;
     }
 
-    /* =========================
-     FOOTER LOGO
-  ========================== */
-    .footer-brand {
-      width: 180px;
-      height: 120px;
-    }
-
-    .footer-brand img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
 
     /* =========================
      HERO VIDEO
@@ -500,6 +486,214 @@
     }
   </style>
   <script src="script.js"></script>
+  <script>
+
+    const projects = [
+      {
+        images: [
+          "asset/img/project/Project1/BMTB01.jpeg",
+          "asset/img/project/Project1/BMTB02.jpeg",
+          "asset/img/project/Project1/BMTB03.jpeg",
+          "asset/img/project/Project1/BMTB04.jpeg",
+          "asset/img/project/Project1/BMTB05.jpeg"
+        ]
+      },
+      {
+        images: [
+          "asset/img/project/Project2/comodity1.jpeg",
+          "asset/img/project/Project2/comodity2.jpeg",
+          "asset/img/project/Project2/comodity3.jpeg",
+          "asset/img/project/Project2/comodity4.jpeg",
+          "asset/img/project/Project2/comodity5.jpeg"
+        ]
+      },
+      {
+        images: [
+          "asset/img/project/Project3/comodity1.jpeg",
+          "asset/img/project/Project3/comodity2.jpeg",
+          "asset/img/project/Project3/comodity3.jpeg"
+        ]
+      }
+    ];
+
+    const gallery = document.getElementById("galleryImage");
+    const thumbs = document.querySelector(".gallery-thumbs");
+    const projectLinks = document.querySelectorAll(".project-link");
+    const galleryArea = document.querySelector(".project-gallery");
+const galleryBg = document.querySelector(".gallery-bg");
+    let currentProject = 0;
+    let currentImage = 0;
+    let autoSlide = null;
+
+
+    /* ===========================
+       CHANGE IMAGE
+    =========================== */
+
+   function changeImage(src){
+
+    gallery.classList.add("fade");
+
+    setTimeout(()=>{
+
+        gallery.src = src;
+
+        galleryBg.style.backgroundImage = `url(${src})`;
+
+        gallery.classList.remove("fade");
+
+    },180);
+
+}
+
+
+    /* ===========================
+       UPDATE THUMBNAIL
+    =========================== */
+
+    function updateThumb() {
+
+      document.querySelectorAll(".gallery-thumbs img").forEach((img, index) => {
+
+        img.classList.toggle("active", index === currentImage);
+
+      });
+
+    }
+
+
+    /* ===========================
+       RENDER GALLERY
+    =========================== */
+
+    function renderGallery() {
+
+      const images = projects[currentProject].images;
+
+      changeImage(images[currentImage]);
+
+      thumbs.innerHTML = "";
+
+      images.forEach((src, index) => {
+
+        const img = document.createElement("img");
+
+        img.src = src;
+
+        if (index === currentImage) {
+
+          img.classList.add("active");
+
+        }
+
+        img.addEventListener("click", () => {
+
+          currentImage = index;
+
+          changeImage(images[currentImage]);
+
+          updateThumb();
+
+          startAutoSlide();
+
+        });
+
+        thumbs.appendChild(img);
+
+      });
+
+    }
+
+
+    /* ===========================
+       LOAD PROJECT
+    =========================== */
+
+    function loadProject(index) {
+
+      currentProject = index;
+
+      currentImage = 0;
+
+      projectLinks.forEach(link => link.classList.remove("active"));
+
+      projectLinks[index].classList.add("active");
+
+      renderGallery();
+
+      startAutoSlide();
+
+    }
+
+
+    /* ===========================
+       AUTO SLIDE
+    =========================== */
+
+    function startAutoSlide() {
+
+      clearInterval(autoSlide);
+
+      autoSlide = setInterval(() => {
+
+        const images = projects[currentProject].images;
+
+        currentImage++;
+
+        if (currentImage >= images.length) {
+
+          currentImage = 0;
+
+        }
+
+        changeImage(images[currentImage]);
+
+        updateThumb();
+
+      }, 3000);
+
+    }
+
+
+    /* ===========================
+       PAUSE HOVER
+    =========================== */
+
+    galleryArea.addEventListener("mouseenter", () => {
+
+      clearInterval(autoSlide);
+
+    });
+
+    galleryArea.addEventListener("mouseleave", () => {
+
+      startAutoSlide();
+
+    });
+
+
+    /* ===========================
+       CLICK PROJECT
+    =========================== */
+
+    projectLinks.forEach((item, index) => {
+
+      item.addEventListener("click", () => {
+
+        loadProject(index);
+
+      });
+
+    });
+
+
+    /* ===========================
+       START
+    =========================== */
+
+    loadProject(0);
+
+  </script>
 </body>
 
 </html>

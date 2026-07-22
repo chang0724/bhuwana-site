@@ -59,6 +59,5 @@ document.querySelectorAll('.project-open').forEach(button => button.addEventList
   modal.setAttribute('aria-hidden', 'false');
 }));
 
-document.querySelector('.modal-close').addEventListener('click', closeModal);
-modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
-document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal(); });
+
+

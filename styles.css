@@ -394,21 +394,17 @@ a {
 }
 
 .project-list {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+
     border-top: 1px solid #48535a;
     border-bottom: 1px solid #48535a;
 }
 
 .project-list article {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    padding: 26px 0;
-    border-bottom: 1px solid #48535a;
-    transition: padding .3s;
-    position: relative;
+    margin: 0;
+    padding: 40px 0;
 }
 
 /* create a full-bleed background layer behind the article content */
@@ -454,31 +450,39 @@ a {
 }
 
 .project-images {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 20px;
+    column-count: 3;
+    column-gap: 18px;
+    margin-top: 25px;
 }
 
 .project-images img {
-    width: calc((100% - 36px) / 3);
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 14px;
+    width: 100%;
+    margin-bottom: 18px;
     display: block;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: .35s;
+    break-inside: avoid;
 }
 
-@media (max-width: 992px) {
-    .project-images img {
-        width: calc((100% - 18px) / 2);
-    }
+.project-images img:hover {
+    transform: scale(1.03);
 }
 
-@media (max-width: 768px) {
-    .project-images img {
-        width: 100%;
+@media(max-width:992px) {
+
+    .project-images {
+        column-count: 2;
     }
+
+}
+
+@media(max-width:768px) {
+
+    .project-images {
+        column-count: 1;
+    }
+
 }
 
 
@@ -531,20 +535,20 @@ a {
 /* ==========================
    FOOTER
 ========================== */
-footer a{
-    transition:.3s;
+footer a {
+    transition: .3s;
 }
 
-footer a:hover{
-    color:#0d6efd !important;
+footer a:hover {
+    color: #0d6efd !important;
 }
 
-footer img{
-    transition:.3s;
+footer img {
+    transition: .3s;
 }
 
-footer img:hover{
-    transform:scale(1.05);
+footer img:hover {
+    transform: scale(1.05);
 }
 
 @media(max-width:992px) {
@@ -740,17 +744,326 @@ footer img:hover{
 }
 
 /* keep project content centered inside the full-width article */
-.project-list article>div {
-    max-width: 1100px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
+
+.project-layout {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    gap: 35px;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    max-width: 100%;
+.project-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+.project-link {
+
+    padding: 22px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    border-left: 4px solid transparent;
+
+    border-radius: 12px;
+
+    background: #161e24;
+
+    cursor: pointer;
+
+    transition: .35s;
+
+}
+
+.project-link:hover {
+
+    border-color: #00b26f;
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+
+}
+
+.project-link.active {
+
+    border-color: #00b26f;
+
+    border-left: 4px solid #00b26f;
+
+    background: #1d262d;
+
+    box-shadow: 0 12px 35px rgba(0, 178, 111, .15);
+
+}
+
+.project-link h3 {
+
+    margin: 0 0 10px;
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+
+    color: #fff;
+
+}
+
+.project-link p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #9aa6af;
+
+}
+
+.project-gallery {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+}
+
+.gallery-bg {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    filter: blur(35px);
+
+    transform: scale(1.25);
+
+    opacity: .45;
+
+    z-index: 1;
+
+    border-radius: 18px;
+
+}
+
+.gallery-bg::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(10, 18, 22, .45);
+
+}
+
+#galleryImage {
+    display: block;
+    position: relative;
+    z-index: 2;
+
+    width: 40%;
+    height: 420px;
+
+    margin: 20px auto;
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    background: transparent;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+#galleryImage.fade {
+
+    opacity: 0;
+
+    transform: scale(.97);
+
+}
+
+.gallery-thumbs {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+.gallery-thumbs img {
+
+    width: 100px;
+
+    height: 80px;
+
+    border-radius: 8px;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    opacity: .45;
+
+    transition: .3s;
+
+}
+
+.gallery-thumbs img:hover {
+
+    opacity: 1;
+
+}
+
+.gallery-thumbs img.active {
+
+    opacity: 1;
+
+    border: 2px solid #16a568;
+
+}
+
+@media (max-width:768px) {
+
+    .project-layout {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 25px;
+
+    }
+
+    /* Project menjadi horizontal */
+
+    .project-menu {
+
+        display: flex;
+
+        flex-direction: row;
+
+        overflow-x: auto;
+
+        gap: 12px;
+
+        padding-bottom: 5px;
+
+    }
+
+    .project-menu::-webkit-scrollbar {
+
+        height: 4px;
+
+    }
+
+    .project-link {
+
+        min-width: 170px;
+
+        margin: 0;
+
+        flex-shrink: 0;
+
+    }
+
+    /* Gallery */
+    .project-gallery {
+
+        position: relative;
+
+        overflow: hidden;
+
+        border-radius: 18px;
+
+    }
+
+    #galleryImage {
+
+        width: calc(100% - 24px);
+        height: 480px;
+        object-fit: contain;
+        margin: 12px;
+        opacity: 1;
+        transform: scale(1);
+        border-radius: 16px;
+        transition:
+            opacity .35s ease,
+            transform .35s ease;
+
+    }
+
+    .gallery-bg {
+
+        height: 520px;
+
+    }
+
+    #galleryImage.fade {
+
+        opacity: 0;
+
+        transform: scale(.97);
+
+    }
+
+    /* Thumbnail */
+
+    .gallery-thumbs {
+
+        display: flex;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        gap: 10px;
+
+        margin-top: 15px;
+
+    }
+
+    .gallery-thumbs img {
+
+        width: 70px;
+
+        height: 70px;
+
+        flex-shrink: 0;
+
+    }
+
 }
